@@ -3,7 +3,7 @@
     <data>
         <record id="paperformat_posreceipt" model="report.paperformat">
             <field name="name">Point Of Sale Receipt</field>
-            <field name="default" eval="True"/>
+            <field name="default" eval="False"/>
             <field name="format">custom</field>
             <field name="page_height">150</field>
             <field name="page_width">60</field>

@@ -981,11 +981,30 @@ function openerp_pos_screens(instance, module){ //module is instance.point_of_sa
         },
         refresh: function() {
             var order = this.pos.get('selectedOrder');
+            
+            
+            
+            customer = order.get_client();
+            var street = '';
+            var city ='';
+            var customer_name='';
+            if (customer != undefined)
+                {
+                customer_name = customer.name;
+                street = customer.street;
+                city=customer.city;   
+                phone=customer.phone;             
+                }
+            
             $('.pos-receipt-container', this.$el).html(QWeb.render('PosTicket',{
                     widget:this,
                     order: order,
                     orderlines: order.get('orderLines').models,
                     paymentlines: order.get('paymentLines').models,
+                    customer_name:customer_name,
+                    customer_street:street,
+                    customer_city:city,
+                    customer_phone:phone,
                 }));
         },
         close: function(){
@@ -1255,6 +1274,8 @@ function openerp_pos_screens(instance, module){ //module is instance.point_of_sa
             var currentOrder = this.pos.get('selectedOrder');
             return (currentOrder.getTotalTaxIncluded() < 0.000001 
                    || currentOrder.getPaidTotal() + 0.000001 >= currentOrder.getTotalTaxIncluded());
+                  // return ((currentOrder.getTotalTaxIncluded() + 100) < 0.000001 
+                   //|| currentOrder.getPaidTotal() + 0.000001 >= (currentOrder.getTotalTaxIncluded() +100));
 
         },
         validate_order: function(options) {

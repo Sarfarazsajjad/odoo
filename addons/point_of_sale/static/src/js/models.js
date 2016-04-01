@@ -1227,6 +1227,7 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
             var cashier = this.pos.cashier || this.pos.user;
             var company = this.pos.company;
             var shop    = this.pos.shop;
+            var partner = this.pos.partner;
             var date = new Date();
 
             return {
@@ -1273,6 +1274,9 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
                 },
                 shop:{
                     name: shop.name,
+                },
+                partner:{
+                    name: partner.name,
                 },
                 currency: this.pos.currency,
             };
