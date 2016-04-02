@@ -960,19 +960,13 @@
             Address: <t t-esc="widget.pos.company.partner_id[1]"/><br />
 -->
 			<br /><b><t t-esc="order.get('name')"/></b><br />
+            
+            <div t-if="isCustomer">
             <br />Customer Name : <t t-esc="customer_name"/><br /><br />
             Customer Phone : <t t-esc="customer_phone"/><br /><br />
             Customer City : <t t-esc="customer_city"/><br /><br />
             Customer Address : <t t-esc="customer_street"/><br /><br />
-            
-<!--
-            customer name:<t t-esc="widget.pos.customer_name"/><br />
-            customer street:<t t-esc="street"/><br />
-            customer city:<t t-esc="city"/><br />
--->
-
-            <!--Customer's Address: <t t-esc="widget.pos.client.name"/><br />-->
-            
+            </div>            
             
             <br />
             <t t-if="widget.pos.config.receipt_header">
@@ -996,7 +990,10 @@
                 <tr t-foreach="orderlines" t-as="orderline">
 										
                     <td>
-                        <t t-esc="orderline.get_product().display_name"/>
+
+						<t t-esc="orderline.get_product().display_name.replace(new RegExp('(NO [A-Z]+,)|(NO [A-Z]+)','gi'),'').replace(new RegExp('\\( ','g'),'\(').replace(new RegExp(', \\)','g'),' \)')"/><br />
+						
+						<!--<t t-esc="orderline.get_product().display_name"/>-->
                          <t t-if="orderline.get_discount() > 0">
                             <div class="pos-disc-font">
                                 With a <t t-esc="orderline.get_discount()"/>% discount

@@ -988,12 +988,15 @@ function openerp_pos_screens(instance, module){ //module is instance.point_of_sa
             var street = '';
             var city ='';
             var customer_name='';
+            var phone = '';
+            var isCustomer = false;
             if (customer != undefined)
                 {
                 customer_name = customer.name;
                 street = customer.street;
                 city=customer.city;   
-                phone=customer.phone;             
+                phone=customer.phone;
+                isCustomer = true;             
                 }
             
             $('.pos-receipt-container', this.$el).html(QWeb.render('PosTicket',{
@@ -1005,6 +1008,7 @@ function openerp_pos_screens(instance, module){ //module is instance.point_of_sa
                     customer_street:street,
                     customer_city:city,
                     customer_phone:phone,
+                    isCustomer:isCustomer,
                 }));
         },
         close: function(){

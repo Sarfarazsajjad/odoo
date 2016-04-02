@@ -801,7 +801,12 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
         },
         //used to create a json of the ticket, to be sent to the printer
         export_for_printing: function(){
+            
+            
+				//var productDisplayNameAlter = this.get_product().display_name + " alter";
+            
             return {
+				
                 quantity:           this.get_quantity(),
                 unit_name:          this.get_unit().name,
                 price:              this.get_unit_price(),
